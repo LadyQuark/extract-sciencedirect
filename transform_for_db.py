@@ -75,7 +75,6 @@ def transform_sc_item(article):
             'type': DEFAULT_VALUES['type'], 
             'metadata': {
                 'url': url,
-                'transcript': article.get('originalText', DEFAULT_VALUES['transcript']),
                 }, 
             'created': {
                 '$date': {
