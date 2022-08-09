@@ -26,14 +26,16 @@ def main():
     # Initialize variables
     failed = {}
     articles = []
+    num_ids = len(id_list)
 
     # Loop though every publication ID in list
-    for id in id_list:
+    for n, id in enumerate(id_list):
         
         # Construct request URL
         url = f"https://api.elsevier.com/content/article/pii/{id}?apiKey={API_KEY}&httpAccept=application%2Fjson"
         # Get response
         try:
+            print(f"Getting article {n + 1} of {num_ids}")
             response = requests.get(url)
             response.raise_for_status()
         # Handle errors
@@ -74,7 +76,7 @@ def main():
 
     # Create json file for transformed episodes in folder `ki_json`
     create_json_file(
-        folder="ki_json", name="articles.json", source_dict=articles, failed=failed
+        folder="ki_json", name="articles", source_dict=articles, failed=failed
     )
 
     # Create json file for errors if any
